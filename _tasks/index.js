@@ -16,5 +16,8 @@ export { default as connect } from './connect.js';
 export { default as rsync } from './rsync.js';
 export { default as surge } from './surge.js';
 
+// Generators
+export { default as generators } from './generators.js';
+
 // Metacommands
 export { default as meta } from './meta.js';
