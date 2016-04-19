@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb/base",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "id-length": [2, {"min": 2, "properties": "never", "exceptions": ["t", "$", "e", "_"]}],
+    "max-len": [2, 180, 4],
+    "no-undef": 0,
+    "no-unused-vars": 1,
+    "func-names": 0,
+    "no-new": 0
+  }
+}

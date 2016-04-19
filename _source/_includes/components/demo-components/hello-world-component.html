@@ -1,0 +1,81 @@
+<div class="component hello-world-component">
+  <h1>Demo component</h1>
+
+  <p>This is a demo component that can be easily reused within other pages.</p>
+
+  <h2>Structure</h2>
+
+  <ul>
+    <li>
+      Assets
+      <ul>
+        <li>
+          Static
+          <ul>
+            <li>Images go to <pre>_assets/images</pre></li>
+            <li>Webfonts go to <pre>_assets/fonts</pre> and are connected in <pre>_assets/scss/common/_webfonts.scss</pre></li>
+          </ul>
+        </li>
+        <li>
+          Styles
+          <ul>
+            <li>SCSS files go to <pre>_assets/scss</pre>/</li>
+            <li>Try to follow existing structure.</li>
+            <li>Take a loot at pre-existing files at <pre>_assets/scss/{base,common}</pre> A lot of useful stuff there, including helpers and media query mixins.</li>
+            <li>The <pre>_assets/scss/{components,page-components}</pre> contain demo data and can be removed / emptied.</li>
+          </ul>
+        </li>
+        <li>
+          JavaScript
+          <ul>
+            <li>JavaScript files go to <pre>_assets/js</pre></li>
+            <li>JS is bundled with Browserify.</li>
+            <li>JS is transpiled with Babel. <pre>ES2015</pre> + <pre>Class Properties</pre> presets are enabled by default.</li>
+            <li>JS is linted by ESLint. Modified Airbnb linter preset is being used.</li>
+            <li>JSX and ReactJS are supported out of the box.</li>
+            <li>Prefer JS loading via <pre>npm</pre> + <pre>require / import</pre> over using <pre>bower</pre>.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      HTML
+      <ul>
+        <li>HTML part of the project goes to <pre>_source</pre></li>
+        <li>Static content is compiled with Jekyll.</li>
+        <li>The <pre>liquid</pre> templating engine is used.</li>
+        <li>Data from <pre>_config/main.yml</pre> and <pre>_source/_data/*.{yml|json|xml}</pre> can be used in templates.</li>
+        <li><pre>_source/_includes</pre> contains partials that can be included in other templates.</li>
+        <li><pre>_source/layouts</pre> contains page layouts. You can set global layout in <pre>_config/main.yml</pre> and override within the page front matter.</li>
+        <li><pre>_source/posts</pre> contains posts for blog-type websites. Can be removed.</li>
+      </ul>
+    </li>
+    <li>
+      GULP
+      <ul>
+        <li>Gulp is used to build the project.</li>
+        <li><strong>Never edit the gulpfile directly.</strong></li>
+        <li>Gulp tasks are located in <pre>_tasks</pre></li>
+        <li>Task and configuration can be found in <pre>_config</pre></li>
+        <li>Deployments via SSH (rsync) and Surge are supported.</li>
+      </ul>
+    </li>
+    <li>
+      Components styleguide
+      <ul>
+        <li>Try to follow the concept of components when developing the front-end.</li>
+        <li>
+          Types of Components
+          <ul>
+            <li><em>Page Components</em> are components that are not related to the actual content (eg. header and footer).</li>
+            <li><em>Regular Components</em> are elementary blocks, used to build the content.</li>
+          </ul>
+        </li>
+        <li>Regular components should be flexible enough to be reused on any other page.</li>
+        <li>Each component should have a dedicated partial in <pre>_source/_includes/components</pre> (Unless it's a ReactJS Component).</li>
+        <li>Each component should have a dedicated stylesheet in <pre>_assets/scss/components</pre></li>
+        <li>If the component requires JS or is a ReactJS component, it should have a dedicated JS in <pre>_assets/js/components</pre></li>
+      </ul>
+    </li>
+  </ul>
+</div>
