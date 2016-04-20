@@ -39,7 +39,7 @@ The demo project homepage contains a detailed project structure explaination. Se
 
 - Try to follow the concept of components when developing the front-end.
 -  Types of Components
-  - _Page Components_ are components that are not related to the actual content (eg. header and footer).
+  - _Page Blocks_ are components that are not related to the actual content (eg. header and footer).
   - _Regular Components_ are elementary blocks, used to build the content.
 - Regular components should be flexible enough to be reused on any other page.
 - Each component should have a dedicated partial in `_source/_includes/components` (Unless it's a ReactJS Component).
