@@ -1,5 +1,6 @@
 features:
   scss:
+    bundle: main.scss
     enabled: true
     minify:  true
     autoprefix:
@@ -20,6 +21,7 @@ features:
     enabled: true
 
 paths:
+  components: components
   source:
     scss:   _assets/scss
     js:     _assets/js

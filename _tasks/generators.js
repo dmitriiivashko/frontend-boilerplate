@@ -5,44 +5,70 @@ import touch from 'touch';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 
+function cleanup(name) {
+  return _.trim(name, ' /');
+}
+
+function getNamespace(name) {
+  if (name.indexOf('/') === -1) {
+    return false;
+  }
+  const pathComponents = name.split('/');
+  return pathComponents.shift();
+}
+
+function getFilename(name) {
+  const pathComponents = name.split('/');
+  return pathComponents.pop();
+}
+
+function getPathToFile(name) {
+  const pathComponents = name.split('/');
+  pathComponents.pop();
+  return pathComponents.join('/');
+}
+
+function getFullPath(name) {
+  return name;
+}
+
 export default function (gulp, settings) {
   gulp.task('g:component', () => {
-    const name = _.trim(yargs.argv.name, ' /');
+    const name = cleanup(yargs.argv.name);
     if (name === '') {
       return;
     }
 
-    const pathComponents = name.split('/');
-    const filename = pathComponents.pop();
-    const namespace = pathComponents.shift();
+    const INCLUDES_DIR = path.resolve(__dirname, '..', settings.main.source, settings.main.includes_dir);
+    const SCSS_DIR = path.resolve(__dirname, '..', settings.build.paths.source.scss);
+    const COMPONENTS_DIRNAME = settings.build.paths.components;
+    const MAIN_SCSS_PATH = path.resolve(__dirname, '..', settings.build.paths.source.scss, settings.build.features.scss.bundle);
 
-    const namespaceFilePath = path.resolve(__dirname, '..', settings.build.paths.source.scss, 'components', `_${namespace}.scss`);
-    const mainCssPath = path.resolve(__dirname, '..', settings.build.paths.source.scss, 'main.scss');
+    const filename = getFilename(name);
+    const namespace = getNamespace(name);
+    const fullPath = getFullPath(name);
+    const pathToFile = getPathToFile(name);
+    const namespaceFilePath = path.resolve(SCSS_DIR, COMPONENTS_DIRNAME, `_${namespace}.scss`);
+
+    mkdirp.sync(path.resolve(SCSS_DIR, COMPONENTS_DIRNAME, pathToFile));
+    mkdirp.sync(path.resolve(INCLUDES_DIR, COMPONENTS_DIRNAME, pathToFile));
+    touch.sync(path.resolve(SCSS_DIR, COMPONENTS_DIRNAME, pathToFile, `_${filename}.scss`));
+    touch.sync(path.resolve(INCLUDES_DIR, COMPONENTS_DIRNAME, pathToFile, `${filename}.html`));
+
+    const mainContent = fs.readFileSync(MAIN_SCSS_PATH, 'utf8');
 
     if (namespace) {
-      mkdirp.sync(path.resolve(__dirname, '..', settings.build.paths.source.scss, 'components', namespace, pathComponents.join('/')));
-      mkdirp.sync(path.resolve(__dirname, '..', settings.main.source, settings.main.includes_dir, 'components', namespace, pathComponents.join('/')));
       touch.sync(namespaceFilePath);
-      touch.sync(path.resolve(__dirname, '..', settings.build.paths.source.scss, 'components', namespace, pathComponents.join('/'), `_${filename}.scss`));
-      touch.sync(path.resolve(__dirname, '..', settings.main.source, settings.main.includes_dir, 'components', namespace, pathComponents.join('/'), `${filename}.html`));
-    } else {
-      touch.sync(path.resolve(__dirname, '..', settings.build.paths.source.scss, 'components', pathComponents.join('/'), `_${filename}.scss`));
-      touch.sync(path.resolve(__dirname, '..', settings.main.source, settings.main.includes_dir, 'components', pathComponents.join('/'), `${filename}.html`));
-    }
-
-    const mainContent = fs.readFileSync(mainCssPath, 'utf8');
-
-    if (namespace) {
       const namespaceContent = fs.readFileSync(namespaceFilePath, 'utf8');
-      if (namespaceContent.indexOf(`"${path.join(namespace, pathComponents.join('/'), filename)}"`) === -1) {
-        fs.appendFileSync(namespaceFilePath, `@import "${path.join(namespace, pathComponents.join('/'), filename)}";\n`, 'utf8');
+      if (namespaceContent.indexOf(`"${fullPath}"`) === -1) {
+        fs.appendFileSync(namespaceFilePath, `@import "${fullPath}";\n`, 'utf8');
       }
       if (mainContent.indexOf(`"components/${namespace}"`) === -1) {
-        fs.appendFileSync(mainCssPath, `@import "components/${namespace}";\n`, 'utf8');
+        fs.appendFileSync(MAIN_SCSS_PATH, `@import "components/${namespace}";\n`, 'utf8');
       }
     } else {
-      if (mainContent.indexOf(`"components/${name}"`) === -1) {
-        fs.appendFileSync(mainCssPath, `@import "components/${name}";\n`, 'utf8');
+      if (mainContent.indexOf(`"components/${fullPath}"`) === -1) {
+        fs.appendFileSync(MAIN_SCSS_PATH, `@import "components/${fullPath}";\n`, 'utf8');
       }
     }
   });
