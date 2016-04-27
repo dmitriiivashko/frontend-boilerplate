@@ -8,8 +8,8 @@ export { default as copy } from './copy.js';
 export { default as scss } from './scss.js';
 
 // Assets pipeline (JS / JSX)
-// export { default as es6 } from './es6.js';
-export { default as es6 } from './webpack.js';
+// export { default as es6 } from './es6-browserify.js';
+export { default as es6 } from './es6-webpack.js';
 
 // Jekyll
 export { default as jekyll } from './jekyll.js';
