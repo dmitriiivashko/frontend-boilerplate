@@ -19,6 +19,7 @@ export default function (gulp, settings) {
     Promise.delay(500).then(() => {
       watch([
         path.resolve(__dirname, '..', settings.main.destination, '**/*'),
+        `!${path.resolve(__dirname, '..', settings.main.destination, '**/*.map')}`,
       ], { verbose: true }).pipe(connect.reload());
     });
   });
