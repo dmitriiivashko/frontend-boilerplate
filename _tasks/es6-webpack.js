@@ -45,9 +45,9 @@ export default function (gulp, settings) {
             query: babelConfig,
           },
         ],
-        resolve: {
-          extensions: ['', '.js', '.jsx'],
-        },
+      },
+      resolve: {
+        extensions: ['', '.js', '.jsx'],
       },
     };
 
