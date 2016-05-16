@@ -7,14 +7,12 @@
 
 ## Installation
 
-- Clone git repository
-- Remove `.git` folder
-- `bundle install`
-- `npm install`
+- `npm install -g frot`
+- `frot [path]`
 
 ## Folder Structure
 
-The demo project homepage contains a detailed project structure explaination. See development section to learn how to build and see the homepage.
+The demo project homepage contains a detailed project structure explanation. See development section to learn how to build and see the homepage.
 
 ## Development
 
