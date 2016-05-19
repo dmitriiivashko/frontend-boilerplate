@@ -1,21 +1,13 @@
 {
-  "name": "livestream-web",
+  "name": "Front-end boilerplate",
+  "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bighuman/livestream-web.git"
-  },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bighuman/livestream-web/issues"
-  },
-  "homepage": "https://github.com/bighuman/livestream-web#readme",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.1.2",
     "babel-eslint": "^6.0.2",
