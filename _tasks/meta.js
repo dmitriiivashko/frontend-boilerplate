@@ -7,7 +7,7 @@ export default function (gulp) {
       [
         'images',
         'fonts',
-        'scss-minified',
+        'css-minified',
         'js-production',
       ],
       done
@@ -17,7 +17,7 @@ export default function (gulp) {
   gulp.task('watch', (done) => {
     runSequence(
       [
-        'scss-watch',
+        'css-watch',
         'images-watch',
         'fonts-watch',
         'js-watch',

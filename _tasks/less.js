@@ -1,6 +1,6 @@
 import path from 'path';
 import plumber from 'gulp-plumber';
-import sass from 'gulp-sass';
+import less from 'gulp-less';
 import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -8,21 +8,22 @@ import cleanCss from 'gulp-clean-css';
 import watch from 'gulp-watch';
 
 export default function (gulp, settings) {
-  if (settings.build.features.css.mode !== 'scss') {
+  if (settings.build.features.css.mode !== 'less') {
     return null;
   }
 
-  const cssSourcePath = path.resolve(__dirname, '..', settings.build.paths.source.scss, '**/*.scss');
-  const cssDestPath = path.resolve(__dirname, '..', settings.main.destination, settings.build.paths.destination.scss);
+  const cssSourcePath = path.resolve(__dirname, '..', settings.build.paths.source.less, '**/*.less');
+  const cssBundlePath = path.resolve(__dirname, '..', settings.build.paths.source.less, settings.build.features.css.bundle);
+  const cssDestPath = path.resolve(__dirname, '..', settings.main.destination, settings.build.paths.destination.less);
 
-  const buildScss = function (minify) {
+  const buildLess = function (minify) {
     if (!settings.build.features.css.enabled) {
       return Promise.resolve(null);
     }
 
-    let chain = gulp.src(cssSourcePath).pipe(plumber({ errorHandler: (err) => {
-      handleErrors('SCSS', err);
-    } })).pipe(sass());
+    let chain = gulp.src(cssBundlePath).pipe(plumber({ errorHandler: (err) => {
+      handleErrors('LESS', err);
+    } })).pipe(less());
 
     if (!minify) {
       chain = chain.pipe(sourcemaps.init());
@@ -47,15 +48,15 @@ export default function (gulp, settings) {
     });
   };
 
-  gulp.task('css', () => buildScss(false));
+  gulp.task('css', () => buildLess(false));
 
-  gulp.task('css-minified', () => buildScss(true));
+  gulp.task('css-minified', () => buildLess(true));
 
   gulp.task('css-watch', () => {
     watch(cssSourcePath, () => {
-      buildScss(false);
+      buildLess(false);
     });
-    return buildScss(false);
+    return buildLess(false);
   });
 
   return null;
