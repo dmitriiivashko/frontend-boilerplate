@@ -1,6 +1,6 @@
 features:
   css:
-    mode: scss
+    mode: less
     bundle: main.less
     enabled: true
     minify:  true
