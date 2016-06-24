@@ -6,6 +6,7 @@ export { default as copy } from './copy.js';
 
 // Assets pipeline (SCSS)
 export { default as scss } from './scss.js';
+export { default as less } from './less.js';
 
 // Assets pipeline (JS / JSX)
 // export { default as es6 } from './es6-browserify.js';
