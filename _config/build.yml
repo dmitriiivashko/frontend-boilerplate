@@ -1,7 +1,7 @@
 features:
   css:
-    mode: less
-    bundle: main.less
+    mode: scss
+    bundle: main.scss
     enabled: true
     minify:  true
     autoprefix:
