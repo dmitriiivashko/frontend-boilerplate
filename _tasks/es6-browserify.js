@@ -14,6 +14,10 @@ export default function (gulp, settings) {
   const jsDestPath = path.resolve(__dirname, '..', settings.main.destination, settings.build.paths.destination.js);
 
   const buildScript = function (file, watch, minify) {
+    if (!settings.features.js.frontendEnabled) {
+      return Promise.resolve(null);
+    }
+
     if (!file) {
       return Promise.resolve(null);
     }

@@ -10,9 +10,8 @@ features:
         browsers:
           - last 5 versions
   js:
-    enabled:    true
-    browserify: true
-    minify:     true
+    frontendEnabled: true
+    minify:          true
   jekyll:
     enabled: true
   notifications:

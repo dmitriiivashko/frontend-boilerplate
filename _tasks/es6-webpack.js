@@ -26,6 +26,10 @@ export default function (gulp, settings) {
   });
 
   const runWebpack = function (watch, minify) {
+    if (!settings.features.js.frontendEnabled) {
+      return Promise.resolve(null);
+    }
+
     if (!gulpSrcEntries || gulpSrcEntries.length === 0) {
       return Promise.resolve(null);
     }
